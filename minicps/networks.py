@@ -238,8 +238,8 @@ class MininetTopoFromNxGraph(Topo):
             else:
                 hosts[name] = self.addHost(
                     name,
-                    ip=params['ip'] + params['netmask'],
-                    mac=params['mac'])
+                    ip=params['attr_dict']['ip'] + params['attr_dict']['netmask'],
+                    mac=params['attr_dict']['mac'])
                 # TODO: check '' ip, mac and netmask
 
         for edge in graph.edges(data=True):
