@@ -234,7 +234,7 @@ class SQLiteState(State):
                 return value
 
             except sqlite3.Error, e:
-                print('_set ERROR: %s: ' % e.args[0])
+                logging.error('DB error %s: ', e.args[0])
 
     def _get(self, what):
         """Returns the first element of the result tuple."""

@@ -26,7 +26,7 @@ import subprocess
 
 import cpppo
 import pymodbus
-
+import logging
 
 # Protocol {{{1
 class Protocol(object):
@@ -167,6 +167,7 @@ class EnipProtocol(Protocol):
     # server ports
     _TCP_PORT = ':44818'
     _UDP_PORT = ':2222'
+    send_count= 0
 
     def __init__(self, protocol):
 
@@ -371,7 +372,8 @@ class EnipProtocol(Protocol):
         :value: sent
         :address: ip[:port]
         """
-
+       
+        EnipProtocol.send_count = EnipProtocol.send_count +1
         tag_string = ''
         tag_string = EnipProtocol._tuple_to_cpppo_tag(what, value)
         # print 'DEBUG enip _send tag_string: ', tag_string
@@ -386,10 +388,26 @@ class EnipProtocol(Protocol):
 
         # TODO: pipe stdout and return the sent value
         try:
+            logging.debug('send count %d', EnipProtocol.send_count)
             client = subprocess.Popen(cmd, shell=False)
-            client.wait()
+            hu#strace = shlex.split(
+               # 'sudo strace -s 9999 -v -p ' +
+              #  str(client.pid) +
+             #   ' -o logs/DBlog.log'
+            #)
+            #trace = subprocess.Popen(strace, shell = False)
+            #trace.stdin.write('Ubuntu')
+            #client.communicate()
+            logging.debug('before wait %d', client.pid)
+            logging.debug('what:  %s  value: %s', str(what), str(value))
+            #logging.debug('client %s', str(client.stdin)
+            ret = client.wait()
+            #trace.kill()
+            #subprocess.check_call(cmd, shell=False)
+            logging.debug('after wait %d, %d', client.pid, ret)
 
         except Exception as error:
+            logging.debug('Exeption error %s', str(error))
             print 'ERROR enip _send: ', error
 
     def _receive(self, what, address='localhost:44818', **kwargs):
@@ -408,7 +426,7 @@ class EnipProtocol(Protocol):
         tag_string = EnipProtocol._tuple_to_cpppo_tag(what)
 
         cmd = shlex.split(
-            self._client_cmd +
+            self._client_cmd + '--print ' +
             '--log ' + self._client_log +
             '--address ' + address +
             ' ' + tag_string
