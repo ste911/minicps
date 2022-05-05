@@ -9,7 +9,6 @@ from utils import IP, LIT_101_M, LIT_301_M, FIT_201_THRESH,LS_201_M,LS_202_M,LS_
 
 import time
 import logging
-from threading import Lock
 
 PLC1_ADDR = IP['plc1']
 PLC2_ADDR = IP['plc2']
@@ -51,7 +50,6 @@ class SwatPLC1(PLC):
         """
 
 #        print 'DEBUG: swat-s1 plc1 enters main_loop.'
-        mutex = Lock()
 
         count = 0
         while(count <= PLC_SAMPLES):

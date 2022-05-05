@@ -341,7 +341,7 @@ class EnipProtocol(Protocol):
 
         cmd = shlex.split(
             CMD +
-            PRINT_STDOUT +
+            #PRINT_STDOUT +
             LOG +
             ADDRESS +
             TAGS
@@ -390,20 +390,6 @@ class EnipProtocol(Protocol):
         try:
             logging.debug('send count %d', EnipProtocol.send_count)
             client = subprocess.Popen(cmd, shell=False)
-            hu#strace = shlex.split(
-               # 'sudo strace -s 9999 -v -p ' +
-              #  str(client.pid) +
-             #   ' -o logs/DBlog.log'
-            #)
-            #trace = subprocess.Popen(strace, shell = False)
-            #trace.stdin.write('Ubuntu')
-            #client.communicate()
-            logging.debug('before wait %d', client.pid)
-            logging.debug('what:  %s  value: %s', str(what), str(value))
-            #logging.debug('client %s', str(client.stdin)
-            ret = client.wait()
-            #trace.kill()
-            #subprocess.check_call(cmd, shell=False)
             logging.debug('after wait %d, %d', client.pid, ret)
 
         except Exception as error:
