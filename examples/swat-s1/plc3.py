@@ -19,7 +19,7 @@ PLC4_ADDR = IP['plc4']
 
 LIT301_3 = ('LIT301', 3)
 
-LIT401_3 = ('LIT401', 3)
+#LIT401_3 = ('LIT401', 3)
 P301 = ('P301', 3)
 MV302 = ('MV302', 3)
 
@@ -29,9 +29,8 @@ LIT401_4 = ('LIT401', 4)
 class SwatPLC3(PLC):
 
     def pre_loop(self, sleep=0.2):
-     #   print 'DEBUG: swat-s1 plc3 enters pre_loop'
-        logging.basicConfig(filename='logs/plc3log.log', encoding ='utf-8', level=logging.DEBUG, filemode = 'w', format='%(asctime)s %(levelname)-8s %(message)s')
 
+        logging.basicConfig(filename='logs/plc3log.log', encoding ='utf-8', level=logging.DEBUG, filemode = 'w', format='%(asctime)s %(levelname)-8s %(message)s')
         time.sleep(sleep)
 
     def main_loop(self):
@@ -48,14 +47,13 @@ class SwatPLC3(PLC):
         while(count <= PLC_SAMPLES):
             logging.debug('plc 3 count : %d', count)
             lit301 = float(self.get(LIT301_3))
-         #   print "DEBUG PLC3 - get lit301: %f" % lit301
-
             self.send(LIT301_3, lit301, PLC3_ADDR)
+            logging.debug("PLC3 - get lit301: %f", lit301)
 
 
             lit401 = float(self.receive(LIT401_4, PLC4_ADDR))
-            #print "DEBUG PLC3 - receive lit401: %f" % lit401
-            self.send(LIT401_3, lit401, PLC3_ADDR)
+            #self.send(LIT401_3, lit401, PLC3_ADDR)
+            logging.debug("PLC3 - receive lit401: %f",lit401)
 
 
             if lit301 >= LIT_301_M['L'] and lit401 <= LIT_401_M['H']:
@@ -64,24 +62,18 @@ class SwatPLC3(PLC):
                  self.send(P301, 1, PLC3_ADDR)
                  self.set(MV302, 1)
                  self.send(MV302, 1, PLC3_ADDR)
-                # print "INFO PLC3 - lit301 over LIT_301_M['H']  and LIT401 over H-> open p301 and mv302"
+                 logging.info("PLC3 - lit301 over LIT_301_M['H']  and LIT401 over H-> open p301 and mv302")
             else:
-            #if  lit301 <= LIT_301_M['L'] or lit401 <= LIT_401_M['H']:
                  # CLOSE MV201
                  self.set(P301, 0)
                  self.send(P301, 0, PLC3_ADDR)
                  self.set(MV302, 0)
                  self.send(MV302, 0, PLC3_ADDR)
-              #   print "INFO PLC3 - LIT301 under LIT301_L " \
-               #        "or LIT401 over LIT401_H close p301 and mv302"
-
-            
-
-            
+                 logging.info("PLC3 - LIT301 under LIT301_L or LIT401 over LIT401_H close p301 and mv302")            
             time.sleep(PLC_PERIOD_SEC)
             count += 1
 
-        print 'DEBUG swat plc3 shutdown'
+        logging.debug('Swat PLC3 shutdown')
 
 
 if __name__ == "__main__":

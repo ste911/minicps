@@ -11,14 +11,12 @@ import time
 import logging
 
 
-PLC3_ADDR = IP['plc3']
 PLC4_ADDR = IP['plc4']
-PLC5_ADDR = IP['plc5']
 PLC6_ADDR = IP['plc6']
 
 LIT401_4 = ('LIT401', 4)
 LS401_4 = ('LS401', 4)
-LS601_4 = ('LS601', 4)
+#LS601_4 = ('LS601', 4)
 
 P401 = ('P401', 4)
 P403 = ('P403', 4)
@@ -45,16 +43,16 @@ class SwatPLC4(PLC):
         while(count <= PLC_SAMPLES):
             logging.debug('plc 4 count : %d', count)
             lit401 = float(self.get(LIT401_4))
-           # print "DEBUG PLC4 - get lit401: %f" % lit401
             self.send(LIT401_4, lit401, PLC4_ADDR)
+            logging.debug("PLC4 - get lit401: %f",lit401)
 
             ls401 = float(self.get(LS401_4))
-            #print "DEBUG PLC4 - get ls401: %f" % ls401
             self.send(LS401_4, ls401, PLC4_ADDR)
+            logging.debug("PLC4 - get ls401: %f",ls401)
 
             ls601 = float(self.receive(LS601_6, PLC6_ADDR))
-           # print "DEBUG PLC4 - receive ls601: %f" % ls601
-            self.send(LS601_4, ls601, PLC4_ADDR)
+            #self.send(LS601_4, ls601, PLC4_ADDR)
+            logging.debug("PLC4 - receive ls601: %f", ls601)
 
             if  lit401 <= LIT_401_M['L'] or ls401 <= LS_401_M['L'] or ls601 >= LS_601_M['H']:
                  # CLOSE MV201
@@ -62,26 +60,21 @@ class SwatPLC4(PLC):
                  self.send(P401, 0, PLC4_ADDR)
                  self.set(P403, 0)
                  self.send(P403, 0, PLC4_ADDR)
-                # print "INFO PLC4 - LIT401 under LIT401_L or "\
-                 #    "LIT401 under LIT401_L  -> close p401 and p403"
-
-            #if  lit401 >= LIT_401_M['L'] and ls401 >= LS_401_M['L'] and ls601 <= LS_601_M['H']:
+                 logging.info("PLC4 - LIT401 under LIT401_L or LIT401 under LIT401_L  -> close p401 and p403")
             else:
                  # OPEN MV201
                  self.set(P401, 1)
                  self.send(P401, 1, PLC4_ADDR)
                  self.set(P403, 1)
                  self.send(P403, 1, PLC4_ADDR)
-                # print "INFO PLC4 - lit401 over LIT_401_M['L'] and"\
-                 #     "LS401 over LS401_L  -> open p401 and p403"
-
+                 logging.info("PLC4 - lit401 over LIT_401_M['L'] and LS401 over LS401_L  -> open p401 and p403")
 
             
 
             time.sleep(PLC_PERIOD_SEC)
             count += 1
 
-        print 'DEBUG swat plc4 shutdown'
+        logging.debug('Swat PLC4 shutdown')
 
 
 if __name__ == "__main__":

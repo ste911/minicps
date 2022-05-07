@@ -50,50 +50,24 @@ import logging
 
 
 # SPHINX_SWAT_TUTORIAL TAGS(
-MV101 = ('MV101', 1)
-MV201 = ('MV201', 2)
-MV302 = ('MV302', 3)
-MV501 = ('MV501', 5)
 
-P101 = ('P101', 1)
-P201 = ('P201', 2)
-P203 = ('P203', 2)
-P205 = ('P205', 2)
-P301 = ('P301', 3)
+MV501 = ('MV501', 5)
 P401 = ('P401', 4)
-P403 = ('P403', 4)
 P501 = ('P501', 5)
 P601 = ('P601', 6)
 
-LS201 = ('LS201', 2)
-LS202 = ('LS202', 2)
-LS203 = ('LS203', 2)
-LS401 = ('LS401', 4)
+
 LS601 = ('LS601', 6)
-
-LIT101 = ('LIT101', 1)
-LIT301 = ('LIT301', 3)
-LIT401 = ('LIT401', 4)
-
-FIT101 = ('FIT101', 1)
-FIT201 = ('FIT201', 2)
-FIT301 = ('FIT301', 3)
-FIT401 = ('FIT401', 4)
-FIT501 = ('FIT501', 5)
-FIT502 = ('FIT502', 5)
 
 class ROPWaterTank(Tank):
 
     def pre_loop(self):
 
         # SPHINX_SWAT_TUTORIAL STATE INIT(
-       
+        self.level=self.set(LS601,0.5)
         # SPHINX_SWAT_TUTORIAL STATE INIT)
 
         # test underflow
-         self.set(MV101, 0)
-         self.set(P101, 1)
-         self.level = self.set(LIT101, 0.500)
 
     def main_loop(self):
 
@@ -107,23 +81,17 @@ class ROPWaterTank(Tank):
             mv501 = self.get(MV501)
             p401 = self.get(P401)
             p501 = self.get(P501)
-            #logging.debug('\t\t rop count %d', count)
+            logging.debug('ROPTank count %d', count)
             if int(mv501) == 1 and int(p401)==1 and int(mv501)==1:
-                
-                #self.set(FIT301, UFF_PUMP_FLOWRATE_IN)
                 inflow = ROP_PUMP_FLOWRATE_IN * PP_PERIOD_HOURS
-                # print "DEBUG RawWaterTank inflow: ", inflow
                 water_volume += inflow
-                #print 'water_volume: %f' %water_volume
                 
 
             # outflows volumes
             p601 = self.get(P601)
             if int(p601) == 1:
                 outflow = ROP_PUMP_FLOWRATE_OUT * PP_PERIOD_HOURS
-                # print "DEBUG RawWaterTank outflow: ", outflow
                 water_volume -= outflow
-                #print 'water_volume: %f' %water_volume
 
             # compute new water_level
             new_level = water_volume / self.section
@@ -132,7 +100,7 @@ class ROPWaterTank(Tank):
                 new_level = 0.0
 
             # update internal and state water level
-            #logging.debug('\t\t\t\t\t\t\tROPTank new level %f with delta %f', new_level, new_level -self.level)
+            logging.debug('ROPTank new level %f with delta %f', new_level, new_level -self.level)
             self.level = self.set(LS601, new_level)
 
             count += 1
@@ -140,7 +108,7 @@ class ROPWaterTank(Tank):
 
 if __name__ == '__main__':
 
-    #logging.basicConfig(filename='logs/physicalProc.log', encoding ='utf-8', level=logging.DEBUG)
+    logging.basicConfig(filename='logs/physicalProc.log', encoding ='utf-8', level=logging.DEBUG)
 
 
     ropt  = ROPWaterTank(

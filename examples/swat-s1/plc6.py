@@ -15,7 +15,6 @@ import logging
 PLC6_ADDR = IP['plc6']
 
 LS601_6 = ('LS601', 6)
-
 P601 = ('P601',6)
 
 class SwatPLC6(PLC):
@@ -35,26 +34,25 @@ class SwatPLC6(PLC):
 
        # print 'DEBUG: swat-s1 plc6 enters main_loop.'
  
-
         count = 0
         while(count <= PLC_SAMPLES):
             logging.debug('plc 6 count : %d', count)
             ls601 = float(self.get(LS601_6))
-           # print "DEBUG PLC6 - get lit601: %f" % ls601
             self.send(LS601_6, ls601, PLC6_ADDR)
+            logging.debug("PLC6 - get lit601: %f", ls601)
 
 
             if ls601 <= LS_601_M['L'] :
                 self.set(P601,0)
-               # print "INFO PLC6 - LS601 under LS601_L or  -> close p601"
+                logging.info("PLC6 - LS601 under LS601_L or  -> close p601")
             else :
                 self.set(P601,1)
-               # print "INFO PLC6 - LS601 under LS601_L or  -> open p601"
+                logging.info("PLC6 - LS601 under LS601_L or  -> open p601")
          
             time.sleep(PLC_PERIOD_SEC)
             count += 1
 
-        print 'DEBUG swat plc6 shutdown'
+        logging.debug('Swat PLC6 shutdown')
 
 
 if __name__ == "__main__":

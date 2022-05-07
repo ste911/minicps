@@ -388,9 +388,8 @@ class EnipProtocol(Protocol):
 
         # TODO: pipe stdout and return the sent value
         try:
-            logging.debug('send count %d', EnipProtocol.send_count)
             client = subprocess.Popen(cmd, shell=False)
-            logging.debug('after wait %d, %d', client.pid, ret)
+            client.wait()
 
         except Exception as error:
             logging.debug('Exeption error %s', str(error))

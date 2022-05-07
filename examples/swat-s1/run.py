@@ -45,10 +45,9 @@ class SwatS1CPS(MiniCPS):
         s1.cmd(sys.executable + ' physical_process_nacl.py &')
         s1.cmd(sys.executable + ' physical_process_hcl.py &')
         s1.cmd(sys.executable + ' physical_process_naocl.py &')
-        s1.cmd(sys.executable + ' physical_process_ufft.py &')
+        s1.cmd(sys.executable + ' physical_process_uff.py &')
         s1.cmd(sys.executable + ' physical_process_rof.py &')
         s1.cmd(sys.executable + ' physical_process_nahso3.py &')
-        s1.cmd(sys.executable + ' physical_process_rof.py &')
         s1.cmd(sys.executable + ' physical_process_rop.py &')
         # SPHINX_SWAT_TUTORIAL RUN)
 
