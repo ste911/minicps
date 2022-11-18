@@ -30,9 +30,6 @@ P101 = ('P101', 1)
 
 
 LIT101 = ('LIT101', 1)
-
-FIT101 = ('FIT101', 1)
-FIT201 = ('FIT201', 2)
 # SPHINX_SWAT_TUTORIAL TAGS)
 
 
@@ -64,23 +61,15 @@ class RawWaterTank(Tank):
             mv101 = self.get(MV101)
             logging.debug('RawWaterTank count %d', count)
             if int(mv101) == 1:
-                self.set(FIT101, PUMP_FLOWRATE_IN)
                 inflow = PUMP_FLOWRATE_IN * PP_PERIOD_HOURS
                 water_volume += inflow
-            
-            else:
-                self.set(FIT101, 0.00)
-
             # outflows volumes
             p101 = self.get(P101)
             mv201 = self.get(MV201)
 
             if int(p101) == 1 and int(mv201) == 1:
-                self.set(FIT201, PUMP_FLOWRATE_OUT)
                 outflow = PUMP_FLOWRATE_OUT * PP_PERIOD_HOURS
                 water_volume -= outflow
-            else:
-                self.set(FIT201, 0.00)
 
             # compute new water_level
             new_level = water_volume / self.section

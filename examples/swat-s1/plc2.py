@@ -7,7 +7,7 @@ from minicps.devices import PLC
 from utils import PLC2_DATA, STATE, PLC2_PROTOCOL
 from utils import PLC_SAMPLES, PLC_PERIOD_SEC
 from utils import IP
-from utils import  LIT_101_M, LIT_301_M, LS_201_M,LS_202_M,LS_203_M, FIT_201_THRESH
+from utils import  LIT_101_M, LIT_301_M, LS_201_M,LS_202_M,LS_203_M
 
 import time
 import logging
@@ -16,7 +16,6 @@ PLC1_ADDR = IP['plc1']
 PLC2_ADDR = IP['plc2']
 PLC3_ADDR = IP['plc3']
 
-FIT201_2 = ('FIT201', 2)
 LS201_2 = ('LS201', 2)
 LS202_2 = ('LS202', 2)
 LS203_2 = ('LS203', 2)
@@ -51,9 +50,6 @@ class SwatPLC2(PLC):
         count = 0
         while(count <= PLC_SAMPLES):
             logging.debug('PLC2 count : %d', count)
-            #fit201 = float(self.get(FIT201_2))
-            #logging.debug("PLC2 - get fit201: %f", fit201)
-           # self.send(FIT201_2, fit201, PLC2_ADDR)
             
             ls201 = float(self.get(LS201_2))
             self.send(LS201_2, ls201, PLC2_ADDR)
@@ -85,7 +81,12 @@ class SwatPLC2(PLC):
                  self.send(P205, 1, PLC2_ADDR)
                 # print "INFO PLC1 - lit301 under LIT_301_M['L'] -> open p201/3/5 mv201."
 
-                 logging.info("PLC2 - lit301 under LIT_301_M['L'] -> open p201/3/5 mv201.")
+                 logging.info("PLC2 - lit301 under LIT_301_M['L'] " \
+                     " and  ls201 over LS_201_M['L'] " \
+                       "or ls202 over LS_202_M['L'] " \
+                       "or ls203 over LS_203_M['L'] " \
+                       "or lit101 over LIT_101_M['L'] " \
+                      "-> open p201/3/5 mv201.")
             else:
                  # CLOSE MV201
                  self.set(MV201, 0)
@@ -97,8 +98,11 @@ class SwatPLC2(PLC):
                  self.set(P205, 0)
                  self.send(P205, 0, PLC2_ADDR)
 
-                 logging.info("PLC2 - fit201 under FIT_201_THRESH " \
-                       "or over LIT_301_M['H']: -> close mv201 p201/3/5.")
+                 logging.info("PLC1 - lit301 over LIT_301_THRESH " \
+                       "or ls201 under LS_201_M['L'] " \
+                       "or ls202 under LS_202_M['L'] " \
+                       "or ls203 under LS_203_M['L'] " \
+                       "or lit101 under LIT_101_M['L']: -> close p101.")
 
 
             time.sleep(PLC_PERIOD_SEC)

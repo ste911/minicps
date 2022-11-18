@@ -32,10 +32,6 @@ P401 = ('P401', 4)
 P501 = ('P501', 5)
 
 LIT401 = ('LIT401', 4)
-FIT301 = ('FIT301', 3)
-FIT401 = ('FIT401', 4)
-FIT501 = ('FIT501', 5)
-FIT502 = ('FIT502', 5)
 
 
 class ROFWaterTank(Tank):
@@ -66,23 +62,14 @@ class ROFWaterTank(Tank):
             if int(mv302) == 1 and int(p301) == 1 :
                 inflow = ROF_PUMP_FLOWRATE_IN * PP_PERIOD_HOURS
                 water_volume += inflow
-            else:
-                self.set(FIT301, 0.00)
 
             # outflows volumes
             p401 = self.get(P401)
             p501 = self.get(P501)
             mv501 = self.get(MV501)
             if int(p401) == 1 and int(p501)==1 and int(mv501)==1:
-                self.set(FIT401, ROF_PUMP_FLOWRATE_OUT)
-                self.set(FIT501, ROF_PUMP_FLOWRATE_OUT)
-                self.set(FIT502, ROF_PUMP_FLOWRATE_OUT)
                 outflow = ROF_PUMP_FLOWRATE_OUT * PP_PERIOD_HOURS
                 water_volume -= outflow
-            else:
-                self.set(FIT401, 0.00)
-                self.set(FIT501, 0.00)
-                self.set(FIT502, 0.00)
 
             # compute new water_level
             new_level = water_volume / self.section

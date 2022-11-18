@@ -75,13 +75,6 @@ LIT101 = ('LIT101', 1)
 LIT301 = ('LIT301', 3)
 LIT401 = ('LIT401', 4)
 
-FIT101 = ('FIT101', 1)
-FIT201 = ('FIT201', 2)
-FIT301 = ('FIT301', 3)
-FIT401 = ('FIT401', 4)
-FIT501 = ('FIT501', 5)
-FIT502 = ('FIT502', 5)
-
 # SPHINX_SWAT_TUTORIAL TAGS)
 
 
@@ -113,25 +106,19 @@ class RawWaterTank(Tank):
             mv101 = self.get(MV101)
             logging.debug('\t\tcount %d', count)
             if int(mv101) == 1:
-                self.set(FIT101, PUMP_FLOWRATE_IN)
                 inflow = PUMP_FLOWRATE_IN * PP_PERIOD_HOURS
                 # print "DEBUG RawWaterTank inflow: ", inflow
                 water_volume += inflow
                 #print 'water_volume: %f' %water_volume
-            else:
-                self.set(FIT101, 0.00)
 
             # outflows volumes
             p101 = self.get(P101)
             mv201 = self.get(MV201)
 
             if int(p101) == 1 and int(mv201) == 1:
-                self.set(FIT201, PUMP_FLOWRATE_OUT)
                 outflow = PUMP_FLOWRATE_OUT * PP_PERIOD_HOURS
                 # print "DEBUG RawWaterTank outflow: ", outflow
                 water_volume -= outflow
-            else:
-                self.set(FIT201, 0.00)
 
             # compute new water_level
             new_level = water_volume / self.section
@@ -293,24 +280,18 @@ class UFFWaterTank(Tank):
             mv501 = self.get(MV501)
             logging.debug('\t\tcount %d', count)
             if int(mv201) == 1 and int(p101):                
-                #self.set(FIT301, UFF_PUMP_FLOWRATE_IN)
                 inflow = UFF_PUMP_FLOWRATE_IN * PP_PERIOD_HOURS
                 # print "DEBUG RawWaterTank inflow: ", inflow
                 water_volume += inflow
                 #print 'water_volume: %f' %water_volume
-            else:
-                self.set(FIT301, 0.00)
 
             # outflows volumes
             p301 = self.get(P301)
             if int(p301) == 1 and int(mv302):
-                self.set(FIT301, UFF_PUMP_FLOWRATE_OUT)
                 outflow = UFF_PUMP_FLOWRATE_OUT * PP_PERIOD_HOURS
                 # print "DEBUG RawWaterTank outflow: ", outflow
                 water_volume -= outflow
                 #print 'water_volume: %f' %water_volume
-            else:
-                self.set(FIT301, 0.00)
 
             # compute new water_level
             new_level = water_volume / self.section
@@ -352,31 +333,21 @@ class ROFWaterTank(Tank):
             p301 = self.get(P301)
             mv501 = self.get(MV501)
             logging.debug('\t\tcount %d', count)
-            if int(mv302) == 1 and int(p301) == 1 :                
-                #self.set(FIT301, UFF_PUMP_FLOWRATE_IN)
+            if int(mv302) == 1 and int(p301) == 1 :
                 inflow = ROF_PUMP_FLOWRATE_IN * PP_PERIOD_HOURS
                 # print "DEBUG RawWaterTank inflow: ", inflow
                 water_volume += inflow
                 #print 'water_volume: %f' %water_volume
-            else:
-                self.set(FIT301, 0.00)
 
             # outflows volumes
             p401 = self.get(P401)
             p501 = self.get(P501)
             mv501 = self.get(MV501)
             if int(p401) == 1 and int(p501)==1 and int(mv501)==1:
-                self.set(FIT401, ROF_PUMP_FLOWRATE_OUT)
-                self.set(FIT501, ROF_PUMP_FLOWRATE_OUT)
-                self.set(FIT502, ROF_PUMP_FLOWRATE_OUT)
                 outflow = ROF_PUMP_FLOWRATE_OUT * PP_PERIOD_HOURS
                 # print "DEBUG RawWaterTank outflow: ", outflow
                 water_volume -= outflow
                 #print 'water_volume: %f' %water_volume
-            else:
-                self.set(FIT401, 0.00)
-                self.set(FIT501, 0.00)
-                self.set(FIT502, 0.00)
 
             # compute new water_level
             new_level = water_volume / self.section
@@ -462,8 +433,7 @@ class ROPWaterTank(Tank):
             p501 = self.get(P501)
             logging.debug('\t\tcount %d', count)
             if int(mv501) == 1 and int(p401)==1 and int(mv501)==1:
-                
-                #self.set(FIT301, UFF_PUMP_FLOWRATE_IN)
+            
                 inflow = ROP_PUMP_FLOWRATE_IN * PP_PERIOD_HOURS
                 # print "DEBUG RawWaterTank inflow: ", inflow
                 water_volume += inflow

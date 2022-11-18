@@ -5,7 +5,7 @@ swat-s1 plc1.py
 from minicps.devices import PLC
 from utils import PLC1_DATA, STATE, PLC1_PROTOCOL
 from utils import PLC_PERIOD_SEC, PLC_SAMPLES
-from utils import IP, LIT_101_M, LIT_301_M, FIT_201_THRESH,LS_201_M,LS_202_M,LS_203_M
+from utils import IP, LIT_101_M, LIT_301_M,LS_201_M,LS_202_M,LS_203_M
 
 import time
 import logging
@@ -14,15 +14,12 @@ PLC1_ADDR = IP['plc1']
 PLC2_ADDR = IP['plc2']
 PLC3_ADDR = IP['plc3']
 
-FIT101 = ('FIT101', 1)
 MV101 = ('MV101', 1)
 LIT101 = ('LIT101', 1)
 P101 = ('P101', 1)
 # interlocks to be received from plc2 and plc3
 #LIT301_1 = ('LIT301', 1)    # to be sent
 LIT301_3 = ('LIT301', 3)    # to be received
-#FIT201_1 = ('FIT201', 1)    # to be sent
-FIT201_2 = ('FIT201', 2)    # to be received
 #LS201_1 = ('LS201', 1)      # to be sent
 LS201_2 = ('LS201', 2)      # to be received
 #LS202_1 = ('LS202', 1)      # to be sent
@@ -83,10 +80,6 @@ class SwatPLC1(PLC):
                 self.send(P101, 0, PLC1_ADDR)
 
             # TODO: use it when implement raw water tank
-            # read from PLC2 (constant value)
-            fit201 = float(self.receive(FIT201_2, PLC2_ADDR))
-            logging.debug("PLC1 - receive fit201: %f", fit201)
-            #self.send(FIT201_1, fit201, PLC1_ADDR)
 
             ls201 = float(self.receive(LS201_2, PLC2_ADDR))
             logging.debug("PLC1 - receive LS201: %f", ls201)
@@ -114,8 +107,11 @@ class SwatPLC1(PLC):
             
             else:
                  # CLOSE p101
-                 logging.info("PLC1 - fit201 under FIT_201_THRESH " \
-                       "or over LIT_301_M['H']: -> close p101.")
+                 logging.info("PLC1 - lit301 over LIT_301_THRESH " \
+                       "or ls201 under LS_201_M['L']" \
+                       "or ls202 under LS_202_M['L']" \
+                       "or ls203 under LS_203_M['L']" \
+                       "or lit101 under LIT_101_M['L']: -> close p101.")
                  self.set(P101, 0)
                  self.send(P101, 0, PLC1_ADDR)
 

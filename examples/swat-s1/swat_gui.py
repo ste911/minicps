@@ -276,7 +276,7 @@ class SwatGui:
             
             #RawWaterTank update
             canvas.coords('rwt',80,30+((1-RawTankLevel)*heightTank),80+widthTank, 30 +heightTank)
-            canvas.itemconfig('rwtl', text = str("Raw Tank"+str(RawTankLevel*TANK_HEIGHT)))
+            canvas.itemconfig('rwtl', text = str("Raw Tank"+str(round(RawTankLevel*TANK_HEIGHT,3))))
 
             #P101 update
             canvas.coords('p101',160,150-P101, 170, 170-P101)
@@ -284,7 +284,7 @@ class SwatGui:
 
             #NaClWaterTank update
             canvas.coords('nacl',180,200+((1-NaClTankLevel)*heightTank),180+widthTank, 200 +heightTank)
-            canvas.itemconfig('nacll', text = str("NaCl Tank\n"+str(NaClTankLevel*NaCl_TANK_HEIGHT)))
+            canvas.itemconfig('nacll', text = str("NaCl Tank\n"+str(round(NaClTankLevel*NaCl_TANK_HEIGHT,3))))
             
             #P201 update
             canvas.coords('p201',190+P201,180, 210+P201, 190)
@@ -292,7 +292,7 @@ class SwatGui:
 
             #HClWaterTank update
             canvas.coords('hcl',260,200+((1-HClTankLevel)*heightTank),260+widthTank, 200 +heightTank)
-            canvas.itemconfig('hcll', text = str("HCl Tank\n\n"+str(HClTankLevel*HCl_TANK_HEIGHT)))
+            canvas.itemconfig('hcll', text = str("HCl Tank\n\n"+str(round(HClTankLevel*HCl_TANK_HEIGHT,3))))
 
             #P203 update
             canvas.coords('p203',270+P203,180, 290+P203, 190)
@@ -300,7 +300,7 @@ class SwatGui:
 
             #NaOClWaterTank update
             canvas.coords('naocl', 340,200+((1-NaOClTankLevel)*heightTank),340+ widthTank, 200 +heightTank)
-            canvas.itemconfig('naocll', text = str("NaOCl Tank\n"+str(NaOClTankLevel*NaOCl_TANK_HEIGHT)))
+            canvas.itemconfig('naocll', text = str("NaOCl Tank\n"+str(round(NaOClTankLevel*NaOCl_TANK_HEIGHT,3))))
             
             #P205 update
             canvas.coords('p205',350+P205,180, 370+P205, 190)
@@ -312,7 +312,7 @@ class SwatGui:
 
             #UFFWaterTank update
             canvas.coords('uff',450,30+((1-UFFTankLevel)*heightTank),450+widthTank, 30 +heightTank)   
-            canvas.itemconfig('uffl', text = str("UFF Tank"+str(UFFTankLevel*UFF_TANK_HEIGHT)))
+            canvas.itemconfig('uffl', text = str("UFF Tank"+str(round(UFFTankLevel*UFF_TANK_HEIGHT,3))))
 
             #P301 update
             canvas.coords('p301',540,150-P301, 550, 170-P301)
@@ -324,7 +324,7 @@ class SwatGui:
 
             #ROFWaterTank update
             canvas.coords('rof',620,30+((1-ROFTankLevel)*heightTank),620+widthTank, 30 +heightTank)
-            canvas.itemconfig('rofl', text = str("ROF Tank"+str(ROFTankLevel*ROF_TANK_HEIGHT)))
+            canvas.itemconfig('rofl', text = str("ROF Tank"+str(round(ROFTankLevel*ROF_TANK_HEIGHT,3))))
 
             #P401 update
             canvas.coords('p401',710,150-P401, 720, 170-P401)
@@ -332,7 +332,7 @@ class SwatGui:
 
             #NaHSO3WaterTank update
             canvas.coords('nahso3',710,200+((1-NaHSO3TankLevel)*heightTank),710+widthTank, 200 +heightTank)
-            canvas.itemconfig('nahso3l', text = str("NaHSO3 Tank "+str(NaHSO3TankLevel*NaHSO3_TANK_HEIGHT)))
+            canvas.itemconfig('nahso3l', text = str("NaHSO3 Tank "+str(round(NaHSO3TankLevel*NaHSO3_TANK_HEIGHT,3))))
             
             #P403 update
             canvas.coords('p403',730+P403,180, 750+P403, 190)
@@ -348,7 +348,7 @@ class SwatGui:
             
             #ROPWaterTank update
             canvas.coords('rop',980,30+((1-ROPTankLevel)*heightTank),980+widthTank, 30 +heightTank)
-            canvas.itemconfig('ropl', text = str("ROP Tank "+str(ROPTankLevel*ROP_TANK_HEIGHT)))
+            canvas.itemconfig('ropl', text = str("ROP Tank "+str(round(ROPTankLevel*ROP_TANK_HEIGHT,3))))
             
             #P501 update
             canvas.coords('p601',1070,150-P601, 1080, 170-P601)

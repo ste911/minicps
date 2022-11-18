@@ -32,8 +32,6 @@ P301 = ('P301', 3)
 
 LIT301 = ('LIT301', 3)
 
-FIT301 = ('FIT301', 3)
-                      
 
 class UFFWaterTank(Tank):
 
@@ -60,21 +58,15 @@ class UFFWaterTank(Tank):
             mv302 = self.get(MV302)
             mv501 = self.get(MV501)
             logging.debug('UFFTank count %d', count)
-            if int(mv201) == 1 and int(p101):                
-                self.set(FIT301, UFF_PUMP_FLOWRATE_IN)
+            if int(mv201) == 1 and int(p101):
                 inflow = UFF_PUMP_FLOWRATE_IN * PP_PERIOD_HOURS
                 water_volume += inflow
-            else:
-                self.set(FIT301, 0.00)
 
             # outflows volumes
             p301 = self.get(P301)
             if int(p301) == 1 and int(mv302):
-                self.set(FIT301, UFF_PUMP_FLOWRATE_OUT)
                 outflow = UFF_PUMP_FLOWRATE_OUT * PP_PERIOD_HOURS
                 water_volume -= outflow
-            else:
-                self.set(FIT301, 0.00)
 
             # compute new water_level
             new_level = water_volume / self.section

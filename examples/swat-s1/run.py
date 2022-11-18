@@ -36,8 +36,8 @@ class SwatS1CPS(MiniCPS):
        
 
         # start devices
-        plc1, plc2, plc3, plc4, plc5, plc6, s1, f1, extAttacker, attacker= self.net.get(
-            'plc1', 'plc2', 'plc3', 'plc4', 'plc5', 'plc6', 's1','f1', 'att1','attacker')
+        plc1, plc2, plc3, plc4, plc5, plc6, s1, f1, attacker2, attacker= self.net.get(
+            'plc1', 'plc2', 'plc3', 'plc4', 'plc5', 'plc6', 's1','f1', 'attacker2','attacker')
 
         
       
@@ -83,10 +83,6 @@ class SwatS1CPS(MiniCPS):
         SwatCLI(self.net)
         for pid in pids:
             if(pid != ""):
-                #print(pid)
-                #pid = pid.split(" ")[1].split("\\")[0]
-                #pg = os.getpgid(int(pid,10))
-                #print(pid,int(pid,10), pg)
                 os.killpg(pid,signal.SIGTERM)
 
         net.stop()

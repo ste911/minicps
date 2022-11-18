@@ -56,9 +56,9 @@ class SwatTopo(Topo):
         self.addLink(plc6, switch)
 
         extattacker= self.addHost(
-            'att1',
-            ip=IP['att1'] + NETMASK,
-            mac=MAC['att1']
+            'attacker2',
+            ip=IP['attacker2'] + NETMASK,
+            mac=MAC['attacker2']
         )
         self.addLink(extattacker,firewall)
 
