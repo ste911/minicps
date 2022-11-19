@@ -67,14 +67,18 @@ class SwatPLC5(PLC):
                  self.send(P501, 0, PLC5_ADDR)
                  self.set(MV501, 0)
                  self.send(MV501, 0, PLC5_ADDR)
-                 logging.info('close MV501 and P501 %f <= %f or %f <= %f or %f >= %f',  lit401, LIT_401_M['L'], ls401, LS_401_M['L'], ls601, LS_601_M['H'])
+                 logging.info("PLC5 - lit401 under LIT_401_M['L'] "\
+                     "or ls401 under LS_401_M['L'] "\
+                     "or ls601 over LS_601_M['H']: -> close mv501 and p501")
 
             else:
                 self.set(P501, 1)
                 self.send(P501, 1, PLC5_ADDR)
                 self.set(MV501, 1)
                 self.send(MV501, 1, PLC5_ADDR)
-                logging.info('open MV501 and P501 %f > %f and %f > %f and %f < %f',  lit401, LIT_401_M['L'], ls401, LS_401_M['L'], ls601, LS_601_M['H'])   
+                logging.info("PLC5 - lit401 over LIT_401_M['L'] "\
+                    "and ls401 over LS_401_M['L'] "\
+                    "and ls601 under LS_601_M['H']: -> open mv501 and p501")   
             
             time.sleep(PLC_PERIOD_SEC)
             count += 1

@@ -60,14 +60,18 @@ class SwatPLC4(PLC):
                  self.send(P401, 0, PLC4_ADDR)
                  self.set(P403, 0)
                  self.send(P403, 0, PLC4_ADDR)
-                 logging.info("PLC4 - LIT401 under LIT401_L or LIT401 under LIT401_L  -> close p401 and p403")
+                 logging.info("PLC4 - lit401 under LIT401_M['L'] "\ 
+                    "or ls401 under LS401_M['L'] "\
+                    "or ls601 over LS_601_M['H']:  -> close p401 and p403")
             else:
                  # OPEN MV201
                  self.set(P401, 1)
                  self.send(P401, 1, PLC4_ADDR)
                  self.set(P403, 1)
                  self.send(P403, 1, PLC4_ADDR)
-                 logging.info("PLC4 - lit401 over LIT_401_M['L'] and LS401 over LS401_L  -> open p401 and p403")
+                 logging.info("PLC4 - lit401 over LIT_401_M['L'] "\
+                     "and LS401 over LS401_M['L'] "\
+                     "and ls601 under LS_601_M['H'] -> open p401 and p403")
 
             
 

@@ -83,9 +83,9 @@ class SwatPLC2(PLC):
 
                  logging.info("PLC2 - lit301 under LIT_301_M['L'] " \
                      " and  ls201 over LS_201_M['L'] " \
-                       "or ls202 over LS_202_M['L'] " \
-                       "or ls203 over LS_203_M['L'] " \
-                       "or lit101 over LIT_101_M['L'] " \
+                       "and ls202 over LS_202_M['L'] " \
+                       "and ls203 over LS_203_M['L'] " \
+                       "and lit101 over LIT_101_M['L']: " \
                       "-> open p201/3/5 mv201.")
             else:
                  # CLOSE MV201
@@ -98,7 +98,7 @@ class SwatPLC2(PLC):
                  self.set(P205, 0)
                  self.send(P205, 0, PLC2_ADDR)
 
-                 logging.info("PLC1 - lit301 over LIT_301_THRESH " \
+                 logging.info("PLC1 - lit301 over LIT_301_M['L']" \
                        "or ls201 under LS_201_M['L'] " \
                        "or ls202 under LS_202_M['L'] " \
                        "or ls203 under LS_203_M['L'] " \

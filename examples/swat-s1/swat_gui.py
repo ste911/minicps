@@ -53,6 +53,8 @@ class SwatGui:
         #RawWaterTank
         canvas.create_rectangle(80,30,80+widthTank, 30 + heightTank )
         canvas.create_rectangle(80,30+((1-RawTankLevel)*heightTank),80+widthTank, 30 +heightTank,fill='blue', tag= "rwt")
+        canvas.create_line(75,30+(0.75*heightTank),85+widthTank,30+(0.75*heightTank),fill = 'red')
+        canvas.create_line(75,30+(0.25*heightTank),85+widthTank,30+(0.25*heightTank),fill = 'red')
         RawTankLabel = canvas.create_text((110, 15), text="Raw Water Tank", tag = 'rwtl')
 
         #MV101
@@ -74,6 +76,8 @@ class SwatGui:
         #NaClTank
         canvas.create_rectangle(180,200,180+widthTank, 200 + heightTank )
         canvas.create_rectangle(180,200+((1-NaClTankLevel)*heightTank),180+widthTank, 200 +heightTank,fill='blue',tag = 'nacl')
+        canvas.create_line(175,200+(0.75*heightTank),185+widthTank,200+(0.75*heightTank),fill = 'red')
+        canvas.create_line(175,200+(0.25*heightTank),185+widthTank,200+(0.25*heightTank),fill = 'red')
         NaClLabel = canvas.create_text((215, 370), text="NaCl Tank", tag= 'nacll')
 
         #Pipe
@@ -85,6 +89,8 @@ class SwatGui:
         #HClTank
         canvas.create_rectangle(260,200,260+widthTank, 200 + heightTank )
         canvas.create_rectangle(260,200+((1-HClTankLevel)*heightTank),260+widthTank, 200 +heightTank,fill='blue', tag= 'hcl')
+        canvas.create_line(255,200+(0.75*heightTank),265+widthTank,200+(0.75*heightTank),fill = 'red')
+        canvas.create_line(255,200+(0.25*heightTank),265+widthTank,200+(0.25*heightTank),fill = 'red')
         HClLabel = canvas.create_text((295, 380), text="HCl Tank", tag = 'hcll')
 
         #Pipe
@@ -96,6 +102,8 @@ class SwatGui:
         #NaOCl
         canvas.create_rectangle(340,200,340+widthTank, 200 + heightTank )
         canvas.create_rectangle(340,200+((1-NaOClTankLevel)*heightTank),340+ widthTank, 200 +heightTank,fill='blue', tag = 'naocl')
+        canvas.create_line(335,200+(0.75*heightTank),345+widthTank,200+(0.75*heightTank),fill = 'red')
+        canvas.create_line(335,200+(0.25*heightTank),345+widthTank,200+(0.25*heightTank),fill = 'red')
         NaOClLabel = canvas.create_text((375, 370), text="NaOcl Tank", tag = 'naocll')
 
         #Pipe
@@ -115,6 +123,8 @@ class SwatGui:
         #UFFeedTank
         canvas.create_rectangle(450,30,450+widthTank, 30 + heightTank )
         canvas.create_rectangle(450,30+((1-UFFTankLevel)*heightTank),450+widthTank, 30 +heightTank,fill='blue', tag = 'uff')
+        canvas.create_line(445,30+(0.75*heightTank),455+widthTank,30+(0.75*heightTank),fill = 'red')
+        canvas.create_line(445,30+(0.25*heightTank),455+widthTank,30+(0.25*heightTank),fill = 'red')
         RawTankLabel = canvas.create_text((480, 15), text="UF Feed Tank", tag = 'uffl')
 
         #Pipe
@@ -134,6 +144,8 @@ class SwatGui:
         #ROFeedTank
         canvas.create_rectangle(620,30,620+widthTank, 30 + heightTank )
         canvas.create_rectangle(620,30+((1-ROFTankLevel)*heightTank),620+widthTank, 30 +heightTank,fill='blue', tag = 'rof')
+        canvas.create_line(615,30+(0.75*heightTank),625+widthTank,30+(0.75*heightTank),fill = 'red')
+        canvas.create_line(615,30+(0.25*heightTank),625+widthTank,30+(0.25*heightTank),fill = 'red')
         RawTankLabel = canvas.create_text((650, 15), text="ROF Tank", tag = 'rofl')
 
         #Pipe
@@ -145,6 +157,8 @@ class SwatGui:
         #NaHSO3Tank
         canvas.create_rectangle(710,200,710+widthTank, 200 + heightTank )
         canvas.create_rectangle(710,200+((1-NaHSO3TankLevel)*heightTank),710+widthTank, 200 +heightTank,fill='blue', tag= 'nahso3')
+        canvas.create_line(705,200+(0.75*heightTank),715+widthTank,200+(0.75*heightTank),fill = 'red')
+        canvas.create_line(705,200+(0.25*heightTank),715+widthTank,200+(0.25*heightTank),fill = 'red')
         NaClLabel = canvas.create_text((745, 360), text="NaHSO3 Tank", tag= 'nahso3l')
 
         #Pipe
@@ -172,6 +186,8 @@ class SwatGui:
         #ROPTank
         canvas.create_rectangle(980,30,980+widthTank, 30 + heightTank )
         canvas.create_rectangle(980,30+((1-ROPTankLevel)*heightTank),980+widthTank, 30 +heightTank,fill='blue', tag='rop')
+        canvas.create_line(975,30+(0.75*heightTank),985+widthTank,30+(0.75*heightTank),fill = 'red')
+        canvas.create_line(975,30+(0.25*heightTank),985+widthTank,30+(0.25*heightTank),fill = 'red')
         RawTankLabel = canvas.create_text((1020, 15), text="RO Permeate Tank", tag = 'ropl')
 
         #Pipe

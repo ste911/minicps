@@ -101,13 +101,17 @@ class SwatPLC1(PLC):
             if lit301 <= LIT_301_M['L'] and lit101 >= LIT_101_M['L'] and ls201 >= LS_201_M['L'] \
                    and ls202 >= LS_202_M['L'] and ls203 >= LS_203_M['L'] :
                  # OPEN p101
-                 logging.info("PLC1 - lit301 under LIT_301_M['L'] -> open p101.")
+                 logging.info("PLC1 - lit301 under LIT_301_M['L'] " \
+                       "and ls201 over LS_201_M['L']" \
+                       "and ls202 over LS_202_M['L']" \
+                       "and ls203 over LS_203_M['L']" \
+                       "and lit101 over LIT_101_M['L']: -> open p101.")
                  self.set(P101, 1)
                  self.send(P101, 1, PLC1_ADDR)
             
             else:
                  # CLOSE p101
-                 logging.info("PLC1 - lit301 over LIT_301_THRESH " \
+                 logging.info("PLC1 - lit301 over LIT_301_M['L'] " \
                        "or ls201 under LS_201_M['L']" \
                        "or ls202 under LS_202_M['L']" \
                        "or ls203 under LS_203_M['L']" \

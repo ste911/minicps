@@ -1,6 +1,6 @@
 
 """
-swat-s1 plc5
+swat-s1 plc6
 """
 
 from minicps.devices import PLC
@@ -44,10 +44,10 @@ class SwatPLC6(PLC):
 
             if ls601 <= LS_601_M['L'] :
                 self.set(P601,0)
-                logging.info("PLC6 - LS601 under LS601_L or  -> close p601")
+                logging.info("PLC6 - LS601 under LS601_M['L'] -> close p601")
             else :
                 self.set(P601,1)
-                logging.info("PLC6 - LS601 under LS601_L or  -> open p601")
+                logging.info("PLC6 - LS601 over LS601_M['L']  -> open p601")
          
             time.sleep(PLC_PERIOD_SEC)
             count += 1

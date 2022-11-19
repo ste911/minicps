@@ -62,14 +62,16 @@ class SwatPLC3(PLC):
                  self.send(P301, 1, PLC3_ADDR)
                  self.set(MV302, 1)
                  self.send(MV302, 1, PLC3_ADDR)
-                 logging.info("PLC3 - lit301 over LIT_301_M['H']  and LIT401 over H-> open p301 and mv302")
+                 logging.info("PLC3 - lit301 over LIT_301_M['H'] "\
+                     " and lit401 under LIT_401_M['H']-> open p301 and mv302")
             else:
                  # CLOSE MV201
                  self.set(P301, 0)
                  self.send(P301, 0, PLC3_ADDR)
                  self.set(MV302, 0)
                  self.send(MV302, 0, PLC3_ADDR)
-                 logging.info("PLC3 - LIT301 under LIT301_L or LIT401 over LIT401_H close p301 and mv302")            
+                 logging.info("PLC3 - lit301 under LIT301_M['L'] "\
+                     "or lit401 over LIT_401_M['H']: -> close p301 and mv302")            
             time.sleep(PLC_PERIOD_SEC)
             count += 1
 
