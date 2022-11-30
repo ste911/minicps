@@ -66,7 +66,6 @@ class SwatPLC2(PLC):
 
             lit301 = float(self.receive(LIT301_3, PLC3_ADDR))
             logging.debug("PLC2 - receive lit301: %f", lit301)
-            #self.send(LIT301_2, lit301, PLC2_ADDR)
 
             if lit301 <= LIT_301_M['L'] and ls201 >= LS_201_M['L'] and ls202 >= LS_202_M['L'] \
                         and ls203 >= LS_203_M['L']:

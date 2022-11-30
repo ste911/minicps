@@ -49,16 +49,13 @@ class SwatPLC5(PLC):
         while(count <= PLC_SAMPLES):
             logging.debug('plc 5 count : %d', count)
             lit401 = float(self.receive(LIT401_4, PLC4_ADDR))
-            #self.send(LIT401_5, lit401, PLC5_ADDR)
             logging.debug("PLC5 - receive lit401: %f", lit401)
             
 
             ls401 = float(self.receive(LS401_4, PLC4_ADDR))
-            #self.send(LS401_5, ls401, PLC5_ADDR)
             logging.debug("PLC5 - receive ls401: %f", ls401)
 
             ls601 = float(self.receive(LS601_6, PLC6_ADDR))
-            #self.send(LS601_5, ls601, PLC5_ADDR)
             logging.debug("PLC5 - receive ls601: %f", ls601)
 
             if  lit401 <= LIT_401_M['L'] or ls401 <= LS_401_M['L'] or ls601 >= LS_601_M['H']:

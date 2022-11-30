@@ -83,20 +83,16 @@ class SwatPLC1(PLC):
 
             ls201 = float(self.receive(LS201_2, PLC2_ADDR))
             logging.debug("PLC1 - receive LS201: %f", ls201)
-            #self.send(LS201_1, ls201, PLC1_ADDR)
 
             ls202 = float(self.receive(LS202_2, PLC2_ADDR))
             logging.debug("PLC1 - receive LS202: %f", ls202)
-            #self.send(LS202_1, ls202, PLC1_ADDR)
 
             ls203 = float(self.receive(LS203_2, PLC2_ADDR))
             logging.debug("PLC1 - receive LS203: %f", ls203)
-            #self.send(LS203_1, ls203, PLC1_ADDR)
 
             # # read from PLC3
             lit301 = float(self.receive(LIT301_3, PLC3_ADDR))
             logging.debug("PLC1 - receive LIT301: %f", lit301)
-            #self.send(LIT301_1, lit301, PLC1_ADDR)
 
             if lit301 <= LIT_301_M['L'] and lit101 >= LIT_101_M['L'] and ls201 >= LS_201_M['L'] \
                    and ls202 >= LS_202_M['L'] and ls203 >= LS_203_M['L'] :

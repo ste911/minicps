@@ -185,14 +185,14 @@ LS_401_M = {  # ultrafiltration tank m
 
 LS_601_MM = {  # ultrafiltration tank mm
     'LL': 250.0,
-    'L': 400.0,
+    'L': 300.0,
     'H': 1000.0,
     'HH': 1200.0,
 }
 
 LS_601_M = {  # ultrafiltration tank m
     'LL': 0.250,
-    'L': 0.400,
+    'L': 0.300,
     'H': 1.000,
     'HH': 1.200,
 }

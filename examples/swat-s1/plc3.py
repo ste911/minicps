@@ -52,7 +52,6 @@ class SwatPLC3(PLC):
 
 
             lit401 = float(self.receive(LIT401_4, PLC4_ADDR))
-            #self.send(LIT401_3, lit401, PLC3_ADDR)
             logging.debug("PLC3 - receive lit401: %f",lit401)
 
 

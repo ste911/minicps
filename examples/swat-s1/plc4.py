@@ -51,7 +51,6 @@ class SwatPLC4(PLC):
             logging.debug("PLC4 - get ls401: %f",ls401)
 
             ls601 = float(self.receive(LS601_6, PLC6_ADDR))
-            #self.send(LS601_4, ls601, PLC4_ADDR)
             logging.debug("PLC4 - receive ls601: %f", ls601)
 
             if  lit401 <= LIT_401_M['L'] or ls401 <= LS_401_M['L'] or ls601 >= LS_601_M['H']:
