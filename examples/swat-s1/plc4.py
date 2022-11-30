@@ -60,7 +60,7 @@ class SwatPLC4(PLC):
                  self.send(P401, 0, PLC4_ADDR)
                  self.set(P403, 0)
                  self.send(P403, 0, PLC4_ADDR)
-                 logging.info("PLC4 - lit401 under LIT401_M['L'] "\ 
+                 logging.info("PLC4 - lit401 under LIT401_M['L'] "\
                     "or ls401 under LS401_M['L'] "\
                     "or ls601 over LS_601_M['H']:  -> close p401 and p403")
             else:
